@@ -214,10 +214,11 @@
 
 
                 function loading() {
+                    document.getElementById("rand-button").setAttribute("onclick"," ");
                     document.getElementById("rand-pic").style.display = "none";
                     var loading = document.createElement("i");
                     var loadingtext = document.createElement("i");
-                    loading.className = "fa fa-refresh fa-spin fa-3x fa-fw margin-bottom";
+                    loading.className = "fa fa-circle fa-spin fa-3x fa-fw margin-bottom";
                     loading.id = "loading-anime";
                     loadingtext.innerText = "加载中";
                     loadingtext.id = "loading-text";
@@ -228,7 +229,12 @@
                         loading.remove();
                         loadingtext.remove();
                         console.log("loading complete");
+                        //延时一秒
+                        setTimeout(function(){
+                        document.getElementById("rand-button").setAttribute("onclick","getpic()");
+                    },1000);
                     }
+                    
                 }
 
 
