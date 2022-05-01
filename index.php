@@ -21,22 +21,12 @@
 
 <body onclick="">
 
-
-
-
-
     <div class="bg">
         <div class="bg-1"></div>
 
     </div>
 
-
-
     <div id="particles-js"></div>
-    <!-- 
-    <script src="particles.js"></script>
-
-    <script src="js\particles-app.js"></script> -->
 
     <script>
         if (document.body.clientWidth > 480) {
@@ -51,15 +41,6 @@
 
         }
     </script>
-
-
-
-    <!-- <div class="nav">
-    sss
-
-    </div> -->
-
-
 
     <!-- 中间的大盒子 -->
     <div id="pic-box">
@@ -111,13 +92,7 @@
 
         <div id="pic-box-icon">
             <a onclick="getpic(0)"><img id="pic-box-icon-img" src="favicon.png" alt="义眼丁真收集站"></a>
-            <!-- <div id="icon-site-info">
-                <p>shdskajk</p>
-            </div> -->
         </div>
-
-
-
 
         <div id="rand-pic-section">
             <div id='pic'>
@@ -180,9 +155,9 @@
                             data: {
                                 id
                             },
+                            
                             success: function(resultjson) {
-                                
-                               var picinfo = JSON.parse(resultjson);
+                                var picinfo = JSON.parse(resultjson);
                                 var fore = picinfo[0].fore.fore;
                                 var mid = picinfo[0].mid.mid;
                                 var suffix = picinfo[0].suffix.suffix;
