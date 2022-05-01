@@ -219,24 +219,26 @@
                             window.i_pic_size = 0;
                         }
                         $.getJSON("getpic.php", function(picjson) {
-                            
                             var picinfo = picjson;
-                            var fore = picinfo[0].fore.fore;
-                            var rand = picinfo[0].rand;
-                            var mid = picinfo[0].mid.mid;
-                            var suffix = picinfo[0].suffix.suffix;
-                            var picpath = picinfo[0].picpath.pic_path;
-                            console.log(picinfo[0]);
-                            console.log(fore, mid, suffix);
-                            console.log(picpath, rand);
-                            document.getElementById("rand-pic").src = picpath;
-                            document.getElementById("fore-title").innerHTML = fore;
-                            document.getElementById("mid-title").innerHTML = mid;
-                            document.getElementById("suffix-title").innerHTML = suffix;
-                            document.getElementById("pic-id").innerHTML = rand;
-                            document.title = fore + "|" + "义眼丁真收集站";
-                            checkfontsize();
-                            checkpicsize();
+                            if(picinfo[0].fore.fore){
+                                var fore = picinfo[0].fore.fore;
+                                var rand = picinfo[0].rand;
+                                var mid = picinfo[0].mid.mid;
+                                var suffix = picinfo[0].suffix.suffix;
+                                var picpath = picinfo[0].picpath.pic_path;
+                                console.log("yes");
+                                document.getElementById("rand-pic").src = picpath;
+                                document.getElementById("fore-title").innerHTML = fore;
+                                document.getElementById("mid-title").innerHTML = mid;
+                                document.getElementById("suffix-title").innerHTML = suffix;
+                                document.getElementById("pic-id").innerHTML = rand;
+                                document.title = fore + "|" + "义眼丁真收集站";
+                                checkfontsize();
+                                checkpicsize(); 
+                            }else{
+                                getpic();
+                            }
+                            
                             
                         })
 
@@ -676,7 +678,6 @@
                     })
                 };
 
-
                 function showfilename() {
                     var file = document.getElementById("user-upload").value;
                     var image = document.querySelector("img");
@@ -703,17 +704,7 @@
                 }
             </script>
 
-
-
         </div>
-
-
-
-
-
-
-
-
 
         <div id="statistics-box">
             <p>总已收集了<em id="total-pic-num"></em>张图片</p>
