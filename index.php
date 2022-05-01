@@ -33,10 +33,15 @@
 
 
     <div id="particles-js"></div>
+    <!-- 
+    <script src="particles.js"></script>
+
+    <script src="js\particles-app.js"></script> -->
 
     <script>
-
+        console.log(document.body.clientWidth);
         if (document.body.clientWidth > 480) {
+            console.log(document.body.clientWidth);
             var script1 = document.createElement('script');
             script1.setAttribute('type', 'text/javascript');
             script1.setAttribute('src', "particles.js");
@@ -48,6 +53,15 @@
 
         }
     </script>
+
+
+
+    <!-- <div class="nav">
+    sss
+
+    </div> -->
+
+
 
     <!-- 中间的大盒子 -->
     <div id="pic-box">
@@ -99,6 +113,9 @@
 
         <div id="pic-box-icon">
             <a onclick="getpic(0)"><img id="pic-box-icon-img" src="favicon.png" alt="义眼丁真收集站"></a>
+            <!-- <div id="icon-site-info">
+                <p>shdskajk</p>
+            </div> -->
         </div>
 
 
@@ -116,7 +133,7 @@
                         </h1>
             </div>
 
-
+            <button onclick="getpic()" type="$_GET" name="rand" class="rand-button" id="rand-button"><em class="fa fa-refresh"></em></button>
 
 
             <script type="text/javascript">
@@ -128,21 +145,28 @@
                     var mid_length = document.getElementById("mid-title").innerText.length;
                     var fore_length = document.getElementById("fore-title").innerText.length;
                     var maxlength = 12;
+                    console.log("sdkjhdskjfhskdfh" + suffix_length);
+                    console.log(window.i_pic_size);
                     if (suffix_length > maxlength && window.i_pic_size == 0) {
+                        console.log("大");
+                        // document.getElementById("pic-box").style.width = 400 + 'px';
                         document.getElementById("suffix-title").style.fontSize = 20 + 'px';
                         document.getElementById("suffix-title").style.top = 0 + 'px';
                         window.i_pic_size = window.i_pic_size + 1;
                     } else if (suffix_length <= 2 && window.i_pic_size == 0) {
+                        // document.getElementById("pic-box").style.width = 400 + 'px';
                         document.getElementById("suffix-title").style.fontSize = 40 + 'px';
                         document.getElementById("suffix-title").style.top = -5 + 'px';
                         window.i_pic_size = window.i_pic_size + 1;
                     } else {
+                        // document.getElementById("pic-box").style.width = 'fit-content';
                         document.getElementById("suffix-title").style.fontSize = 30 + 'px';
                         document.getElementById("suffix-title").style.top = 0 + 'px';
                     }
                 }
 
                 function checkpicsize() {
+                    console.log(window.innerWidth);
                     document.getElementById("rand-pic").style.maxWidth = (window.innerWidth - 100) + "px";
 
                 }
@@ -150,6 +174,8 @@
 
                 function getpic(id) {
                     loading();
+                    console.log("图片获取开始");
+                    console.log(id);
                     if (id !== null && id !== undefined) {
                         if (window.i_pic_size !== 0) {
                             window.i_pic_size = 0;
@@ -164,11 +190,16 @@
                             },
                             success: function(resultjson) {
                                 
+                                // console.log(resultjson));
                                 var picinfo = JSON.parse(resultjson);
                                 var fore = picinfo[0].fore.fore;
                                 var mid = picinfo[0].mid.mid;
                                 var suffix = picinfo[0].suffix.suffix;
                                 var picpath = picinfo[0].picpath[0];
+                                console.log(picinfo[0]);
+                                console.log(fore, mid, suffix);
+                                console.log(picpath);
+
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;
@@ -195,6 +226,9 @@
                             var mid = picinfo[0].mid.mid;
                             var suffix = picinfo[0].suffix.suffix;
                             var picpath = picinfo[0].picpath.pic_path;
+                            console.log(picinfo[0]);
+                            console.log(fore, mid, suffix);
+                            console.log(picpath, rand);
                             document.getElementById("rand-pic").src = picpath;
                             document.getElementById("fore-title").innerHTML = fore;
                             document.getElementById("mid-title").innerHTML = mid;
@@ -224,6 +258,7 @@
                     loadingtext.id = "loading-text";
                     document.getElementById("pic").appendChild(loading);
                     document.getElementById("pic").appendChild(loadingtext);
+                    console.log("loading");
                     document.getElementById("rand-pic").onload = function() {
                         document.getElementById("rand-pic").style.display = "block";
                         loading.remove();
@@ -248,7 +283,7 @@
 
         </div>
 
-        <button onclick="getpic()" type="$_GET" name="rand" class="rand-button"><em class="fa fa-refresh"></em></button>
+
         <div class="pic-id-box">
             <i id="pic-id"></i>
         </div>
@@ -296,12 +331,16 @@
                             // 返回结果数量
                             var resultnum = resultjson[0].result.length;
 
+                            console.log(resultnum);
+
+
                             //yy数组
                             var resultfore = [];
                             for (i = 0; i < resultnum; i++) {
                                 search_result_box = document.getElementById("search-result-box");
 
                                 resultfore.push(resultjson[0].result[i][1]);
+                                console.log("I:" + i);
 
                                 result_li = document.createElement("a");
 
@@ -335,6 +374,11 @@
 
                             }
 
+
+
+
+                            console.log(resultjson);
+                            console.log(resultfore);
 
                         }
 
@@ -380,6 +424,7 @@
                     }, 200);
 
                 }
+                console.log(document.getElementById('declaration-box').style.display);
             }
 
             function declarationoff() {
@@ -404,6 +449,7 @@
                     }, 200);
 
                 }
+                console.log(document.getElementById('recommendation-box').style.display);
             }
 
             function recommendationoff() {
@@ -429,6 +475,7 @@
                     }, 200);
 
                 }
+                console.log(document.getElementById('upload-box').style.display);
             }
 
             function uploadoff() {
@@ -455,6 +502,7 @@
                     }, 200);
 
                 }
+                console.log(document.getElementById('statistics-box').style.display);
             }
 
             function statisticsoff() {
@@ -562,6 +610,11 @@
 
             <script>
                 function uploadpic() {
+
+                    console.log(document.getElementById("upload-checkbox").checked);
+
+
+
                     if (!document.getElementById("user-upload").value) {
                         document.getElementById("show-upload-status").innerHTML = "请上传一张图片";
                     } else if (document.getElementById("upload-input-fore").value == "" || document.getElementById("upload-input-mid").value == "" || document.getElementById("upload-input-suffix").value == "") {
@@ -580,6 +633,7 @@
                             data: picToUpload,
                             success: function(resultjson) {
                                 var resultjson = JSON.parse(resultjson);
+                                console.log(resultjson);
                                 document.getElementById("show-upload-status").innerHTML = "上传成功，序号为" + resultjson[0].id;
                                 document.getElementById("upload-input-fore").value = "";
                                 document.getElementById("upload-input-mid").value = "";
@@ -606,6 +660,9 @@
                             // 返回结果数量
                             var resultnum = resultjson[0].result.length;
                             for (i = 0; i < resultnum; i++) {
+
+                                console.log("I:" + i);
+                                console.log(resultjson);
                                 if (resultjson[0].result[0][0] == 0) {
                                     document.getElementById("pic-path").innerHTML = "这个丁真还没被上传过";
                                 } else if (resultjson[0].result[0][0] == window.totalpicnum) {
@@ -683,6 +740,7 @@
                     },
                     success: function(resultjson) {
                         var resultjson = JSON.parse(resultjson);
+                        console.log(resultjson);
                         var totalvisit = resultjson[0].totalvisit;
                         document.getElementById("totalvisit").innerHTML = totalvisit;
                     }
