@@ -217,18 +217,28 @@ width: 100%;
     border: 0ch;
     transition: 0.12s ease-in-out;
     user-select: none;
+    border: 0;
 }
 
 .rand-button:hover{
     cursor: pointer;
     transform: scale(1.15);
     box-shadow: 0 0rem 4rem rgba(0, 0, 0, 0.544)!important;
+    border: 0;
 }
 
 .rand-button:active{
     transform: scale(1.05);
     background-color: rgb(208, 208, 208);
     box-shadow: 0 0rem 5rem rgba(0, 0, 0, 0.886)!important;
+    border: 0;
+}
+
+.rand-button-active{
+    transform: scale(0.95);
+    background-color: rgb(208, 208, 208)!important;
+    box-shadow: 0 0rem 5rem rgba(0, 0, 0, 0.886)!important;
+    border: 0;
 }
 
 
