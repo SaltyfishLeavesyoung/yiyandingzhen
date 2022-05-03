@@ -3,9 +3,7 @@
     $search_name = $_POST["search-name"];
 
 
-    $servername = "";
-    $username = "";
-    $password = "";
+require_once("password.php");
 
     $conn = new mysqli($servername , $username, $password);
 

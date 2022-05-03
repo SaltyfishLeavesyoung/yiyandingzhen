@@ -11,9 +11,7 @@
     $file_suffix = substr($file,strpos($file,"."));
 
     //数据库
-    $servername = "";
-    $username = "";
-    $password = "";
+require_once("password.php");
 
     $conn = new mysqli($servername , $username, $password);
 

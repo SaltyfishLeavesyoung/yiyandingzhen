@@ -2,9 +2,7 @@
 
 $id = $_POST["id"];
 
-$servername = "";
-$username = "";
-$password = "";
+require_once("password.php");
 
 $conn = new mysqli($servername , $username, $password);
 

@@ -4,9 +4,6 @@
     window.history.replaceState(null, null, window.location.href);
 </script>
 
-
-
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.7, maximum-scale=2.0, user-scalable=yes" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
