@@ -13,7 +13,6 @@
     <link href="favicon.ico" rel="shortcut icon">
     <script type="text/javascript" src="https://pss.bdstatic.com/r/www/cache/static/protocol/https/jquery/jquery-1.10.2.min_65682a2.js"></script>
     <script type="text/javascript" src="js\jquery-form.js"></script>
-
 </head>
 
 <body onclick="">
@@ -651,17 +650,23 @@
         </div>
 
         <div id="statistics-box">
-            <p>总已收集了<em id="total-pic-num"></em>张图片</p>
-            <p>这是本站第<a id="totalvisit"></a>次被访问</p>
-            <p>建议使用电脑访问本站点</p>
-            <p></p>
+            <em id="total-pic-num"></em>
+            <i id="total-pic-num-text" >张照片已收集</i>
+            <br/>
+            <em id="totalvisit"></em>
+            <i id="totalvisit-text" >次访问已达成</i>
+            <br/>
+            <em id="waittoverify"></em>
+            <i id="waittoverify-text" >张照片待审核</i>
+
             <!-- 页面统计 -->
             <script>
                 $.getJSON("getsiteinfo.php", function(siteinfojson) {
                     var siteinfo = siteinfojson;
-
+                    var waittoverify = siteinfo[0].wait_to_verify[0];
                     var totalpicnum = siteinfo[0].total_pic_num[0];
                     document.getElementById("total-pic-num").innerHTML = totalpicnum;
+                    document.getElementById("waittoverify").innerHTML = waittoverify;
                     window.totalpicnum = totalpicnum;
                 })
 

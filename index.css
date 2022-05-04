@@ -2,8 +2,10 @@ body{
     overflow: hidden;
     margin:0;
     padding: 0;
-    font-family:Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,微软雅黑,Arial,sans-serif;
+    font-family:zcool Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,微软雅黑,Arial,sans-serif;
 }
+
+
 
 .nav{
     width: auto;
@@ -266,11 +268,6 @@ width: 100%;
     left:0.5px;
     position: relative;
     font-size: 20px;
-}
-
-#pic-box:active{
-
-
 }
 
 
@@ -675,8 +672,6 @@ padding-top: -10px;
 }
 
 
-.upload-pic-button:hover em{
-}
 
 .upload-pic-button em{
     transition: 0.4s ease-in-out; 
@@ -700,22 +695,66 @@ padding-top: -10px;
     display: none;
     position: absolute;
     min-height: 300px;
-    width: 400px;
+    max-width: 390px;
+    min-width: 200px;
     bottom: 90px;
     right: 20px;
-    background: rgba(251, 251, 251, 0.945);
+    color: rgb(255, 255, 255);
+    background: rgba(251, 251, 251, 0.067);
     border-radius: 10px; 
     box-shadow: 0 0rem 5rem rgba(0, 0, 0, 0.599)!important;
+    transition: 0.5s ease-in-out;
 }
 
 #statistics-button{
     right: 20px;
 }
 
+#total-pic-num{
+    user-select: none;
+    position: relative;
+    font-size: 100px;
+    top:40px;
+}
 
+#total-pic-num-text{
+    user-select: none;
+    position: relative;
+    top:40px;
+}
 
+#totalvisit{
+    user-select: none;
+    position: relative;
+    font-size: 100px;
+    top:80px;
+}
 
+#totalvisit-text{
+    user-select: none;
+    position: relative;
+    top:80px;
+}
 
+#waittoverify{
+    user-select: none;
+    position: relative;
+    font-size: 100px;
+    top:120px;
+}
+
+#waittoverify-text{
+    user-select: none;
+    position: relative;
+    top:120px;
+}
+
+@media screen and (max-width: 1200px) { 
+    #statistics-box{
+        color: #000;
+        background: rgba(251, 251, 251, 0.919);
+
+    } }
 
 
 .box-scale-up{

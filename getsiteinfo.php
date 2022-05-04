@@ -12,17 +12,13 @@ mysqli_select_db($conn , "yiyandingzhen");
 
 
     $total_pic_num = mysqli_fetch_array($conn -> query("SELECT COUNT(*) FROM yiyandingzhen")) ;
-
-    $dbsql = 'SELECT * FROM yiyandingzhen';
-    $retvar = $conn -> query($dbsql);
-    $data = mysqli_fetch_all($retvar);
-
+    $wait_to_verify = mysqli_fetch_array($conn -> query("SELECT COUNT(*) FROM yiyandingzhen where verified = 0")) ;
 
 
     $retarr[] = array(
         
-        'total_pic_num' => $total_pic_num
-
+        'total_pic_num' => $total_pic_num,
+        'wait_to_verify' => $wait_to_verify
     );
 
     echo json_encode($retarr); 

@@ -31,20 +31,33 @@ $psword=$_GET['password'];
     padding: 10px;
     border: 2px soild black;
 }
+.upload-form{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    background: aliceblue;
+}
+.upload-form textarea{
+    height: 100px;
+    
+}
 </style>
 
 <div id="result-box">
     
 </div>
 
+<div class="upload-form">
 <form id="upload-form">
     
-<input name="exception" placeholder="除开？114514 to delete, ,to sep">
+<textarea name="exception" placeholder="除开？114514 to delete, ,to sep"></textarea>
 
 </form>
-
-
 <button onclick="upload()" type="$_POST" name="upload">通过了</button>
+</div>
+
+
 
 
 
@@ -97,7 +110,7 @@ $psword=$_GET['password'];
                                 
                             }
                         })
-                        // location.reload();
+                        location.reload();
     }
             
     
