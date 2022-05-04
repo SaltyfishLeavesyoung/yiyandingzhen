@@ -25,24 +25,45 @@ mysqli_select_db($conn , "yiyandingzhen");
     }
     
     
+
     if($id !== null){
-        $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = {$id}" ));
-        $mid = mysqli_fetch_array($conn -> query("SELECT mid FROM yiyandingzhen WHERE pic_id = {$id} " ));
-        $suffix = mysqli_fetch_array($conn -> query("SELECT suffix FROM yiyandingzhen WHERE pic_id = {$id} " ));
-        $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = {$id} " ));
+        $verified = mysqli_fetch_array($conn -> query("SELECT verified FROM yiyandingzhen WHERE pic_id = {$id}" ));
+        if ($verified[0] == 1){
+            $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = {$id}" ));
+            $mid = mysqli_fetch_array($conn -> query("SELECT mid FROM yiyandingzhen WHERE pic_id = {$id} " ));
+            $suffix = mysqli_fetch_array($conn -> query("SELECT suffix FROM yiyandingzhen WHERE pic_id = {$id} " ));
+            $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = {$id} " ));
 
-        $picFolderPath = "pic";
+            $picFolderPath = "pic";
 
-        $retarr[] = array(
+            $retarr[] = array(
         
-            'fore' => $fore,
-            'mid' => $mid,
-            'suffix' => $suffix,
-            'picpath' => $picPath,
-            'request-id' => $id,);
-            echo json_encode($retarr); 
+                'fore' => $fore,
+                'mid' => $mid,
+                'suffix' => $suffix,
+                'picpath' => $picPath,
+                'request-id' => $id,
+                'verified' => $verified);
+                echo json_encode($retarr); 
+        }else{
+            $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = 301" ));
+            $mid = mysqli_fetch_array($conn -> query("SELECT mid FROM yiyandingzhen WHERE pic_id = 301 " ));
+            $suffix = mysqli_fetch_array($conn -> query("SELECT suffix FROM yiyandingzhen WHERE pic_id = 301 " ));
+            $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = 301 " ));
+            $retarr[] = array(
+                'fore' => $fore,
+                'mid' => $mid,
+                'suffix' => $suffix,
+                'picpath' => $picPath,
+                'request-id' => $id,
+                'verified' => $verified);
+                echo json_encode($retarr); 
+        }
+        
     }else{
-       $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = {$rand} " ));
+        $verified = mysqli_fetch_array($conn -> query("SELECT verified FROM yiyandingzhen WHERE pic_id = {$rand}" ));
+        if ($verified[0] == 1){
+        $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = {$rand} " ));
         $mid = mysqli_fetch_array($conn -> query("SELECT mid FROM yiyandingzhen WHERE pic_id = {$rand} " ));
         $suffix = mysqli_fetch_array($conn -> query("SELECT suffix FROM yiyandingzhen WHERE pic_id = {$rand} " ));
         $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = {$rand} " ));
@@ -58,8 +79,24 @@ mysqli_select_db($conn , "yiyandingzhen");
             'rand_status' => $rand_status,
             'rand' => $rand,
             'request-id' => $id,
+            'verified' => $verified
 
-    ); echo json_encode($retarr); 
+    ); 
+    echo json_encode($retarr); 
+}
+    else{
+            $fore = mysqli_fetch_array($conn -> query("SELECT fore FROM yiyandingzhen WHERE pic_id = 114514" ));
+            $mid = mysqli_fetch_array($conn -> query("SELECT mid FROM yiyandingzhen WHERE pic_id = 114514 " ));
+            $suffix = mysqli_fetch_array($conn -> query("SELECT suffix FROM yiyandingzhen WHERE pic_id = 114514 " ));
+            $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = 114514 " ));
+            $retarr[] = array(
+                'fore' => $fore,
+                'mid' => $mid,
+                'suffix' => $suffix,
+                'picpath' => $picPath,
+                'verified' => $verified);
+            echo json_encode($retarr); 
+    }
     }
 
 ?>
