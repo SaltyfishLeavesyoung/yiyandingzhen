@@ -209,8 +209,15 @@
 
                 }
 
-
+                var loading_i = 0;
+                window.loading_i = loading_i;
                 function loading() {
+                    if (window.loading_i == 1){
+                        document.getElementById("loading-anime").remove();
+                        document.getElementById("loading-text").remove();
+                        window.loading_i = 0;
+                    }
+
                     document.getElementById("rand-button").setAttribute("onclick"," ");
                     document.getElementById("rand-button").classList.add("rand-button-active");
                     
@@ -224,16 +231,19 @@
                     document.getElementById("pic").appendChild(loading);
                     document.getElementById("pic").appendChild(loadingtext);
                     console.log("loading");
+                    window.loading_i = 1;
+                    setTimeout(function(){
+                        document.getElementById("rand-button").classList.remove("rand-button-active");
+                        document.getElementById("rand-button").setAttribute("onclick","getpic()");
+                    },1000);
                     document.getElementById("rand-pic").onload = function() {
                         document.getElementById("rand-pic").style.display = "block";
                         loading.remove();
                         loadingtext.remove();
                         console.log("loading complete");
+                        window.loading_i = 0;
                         //延时一秒
-                        setTimeout(function(){
-                        document.getElementById("rand-button").classList.remove("rand-button-active");
-                        document.getElementById("rand-button").setAttribute("onclick","getpic()");
-                    },1000);
+                        
                     }
                     
                 }
