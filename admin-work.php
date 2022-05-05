@@ -4,8 +4,6 @@
     $exception_post = $_POST["exception"];
     $exception[] = explode(",",$exception_post);  
     
-    
-    
     require_once("password.php");
     
     $conn = new mysqli($servername , $username, $password);
@@ -21,7 +19,7 @@
         $retvar = $conn -> query($dbsql);
         $data = mysqli_fetch_all($retvar);
     
-           $result = mysqli_fetch_all($conn -> query("SELECT * FROM yiyandingzhen WHERE verified = 0 " ));
+        $result = mysqli_fetch_all($conn -> query("SELECT * FROM yiyandingzhen WHERE verified = 0 " ));
     
         if($exception[0][0]==""){
             $sql_request = "UPDATE yiyandingzhen SET verified = 1 WHERE verified = 0";
@@ -30,10 +28,10 @@
         }else if($exception[0][0]==114514){
             for($i=1;$i<count($exception[0]);$i++){
                 $exception_for = $exception[0][$i];
+                $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = {$exception_for} " ));
                 $sql_request = "DELETE FROM yiyandingzhen WHERE pic_id = $exception_for";
-                
-                $conn -> query($sql_request);
-            
+                $conn -> query($sql_request); 
+                unlink($picPath[0][0]);
             }
             $mode = 3;
         }

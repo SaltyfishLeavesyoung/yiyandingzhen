@@ -5,23 +5,12 @@
     
 require_once("password.php");
 
-    $conn = new mysqli($servername , $username, $password);
-
-    if ($conn -> connect_error) {
-        die("ERROR CONNECTING" . $conn -> connect_error);
-    }
-
-    mysqli_select_db($conn , "yiyandingzhen");
-
-    $sql_search = "SELECT totalvisit FROM siteinfo";
-    $retvar = $conn -> query($sql_search);
-
-    $result = mysqli_fetch_array($retvar);
-
     if($hasloaded){
-        $totalvisit = $result[0]+1;
-        $conn -> query("delete from siteinfo where totalvisit='$result[0]' ");
-        $conn -> query("insert into siteinfo (totalvisit) values ('$totalvisit')");
+        $file = fopen("timesbeenopen.txt" , "r");
+        $totalvisit = (int)fread($file,filesize("timesbeenopen.txt"));
+        $newtotalvisit = $totalvisit + 1;
+        $file = fopen("timesbeenopen.txt" , "w");
+        fwrite($file,$newtotalvisit);   
     }
 
     
