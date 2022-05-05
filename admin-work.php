@@ -31,6 +31,7 @@
             for($i=1;$i<count($exception[0]);$i++){
                 $exception_for = $exception[0][$i];
                 $sql_request = "DELETE FROM yiyandingzhen WHERE pic_id = $exception_for";
+                
                 $conn -> query($sql_request);
             
             }

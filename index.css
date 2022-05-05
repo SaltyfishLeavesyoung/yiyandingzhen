@@ -260,7 +260,90 @@ width: 100%;
     position: relative;
 }
 
+@media screen and (min-width: 1200px) { 
+    #pic-box{
+        box-shadow: 0 -1rem 5rem rgba(0, 0, 0, 0.505);
+        border-radius: 10px;
+        background-color: rgb(251, 251, 251);
+        height: 350px;
+        min-width: 700px;
+        width:max-content;
+        position: absolute;
+        margin: auto;
+        padding: 20px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        line-height: 10px;
+        z-index:20;
+        transition:  0.2s  ease-in-out;
+        
+    }
 
+    #rand-pic{
+        position: absolute;
+        left: 30px;
+        box-shadow: 0 -1rem 4rem rgba(0, 0, 0, 0.396);
+        max-height: 300px !important;
+        border-radius: 5px;
+    }
+
+    #pic{
+        position: absolute;
+        left: 0;
+        margin: -20px 0;
+            display: block;
+        height: 100%;
+        justify-content: center;
+        
+    }
+
+    #rand-pic-section{
+        display: block;
+        height: 100%;
+    }
+
+    #pic-info-title{
+        position: relative;
+        top: 10px;
+        text-align: right !important;
+        }
+
+
+    #fore-title{
+        position: relative;
+        align-self: auto;
+        font-size: 40px;
+    }
+    
+    #mid-title{
+        font-size: 20px;
+    }
+    
+    #suffix-title{
+        /* word-break:keep-all;
+        white-space:nowrap; */
+        position: relative;
+        top:0px;
+        font-size: 30px;
+    }
+
+    #loading-anime{
+        margin-left: 20px;
+    }
+    
+    
+    #loading-text{
+        margin-left: 20px;
+        position: absolute;
+    }
+
+    
+    .search-result{
+        width: 100% !important;
+    }
+}
 
 
 #icon-site-info{
@@ -285,6 +368,7 @@ width: 100%;
 }
 
 #rand-pic{
+    border-radius: 5px;
     box-shadow: 0 -1rem 4rem rgba(0, 0, 0, 0.396);
     max-height: 200px;
 }
@@ -872,7 +956,7 @@ padding-top: -10px;
     top:120px;
 }
 
-@media screen and (max-width: 1200px) { 
+@media screen and (max-width: 1400px) { 
     #statistics-box{
         color: #000;
         background: rgba(251, 251, 251, 0.919);

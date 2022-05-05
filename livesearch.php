@@ -13,8 +13,8 @@ require_once("password.php");
     mysqli_select_db($conn , "yiyandingzhen");
 
     
-   
-    $sql_search = "SELECT * FROM yiyandingzhen WHERE fore LIKE '%$search_name%'";
+
+    $sql_search = "SELECT * FROM yiyandingzhen WHERE fore LIKE '%$search_name%' OR mid LIKE '%$search_name%' OR suffix LIKE '%$search_name%'";
     if (is_numeric($search_name)){
         $search_name = (int)$search_name;
         $sql_search = "SELECT * FROM yiyandingzhen WHERE pic_id = '$search_name'";
