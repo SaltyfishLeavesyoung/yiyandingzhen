@@ -16,7 +16,12 @@
 </head>
 
 
-<body onclick="">
+<body onresize="checkpicsize()">
+<div id="large-box">
+        <img id="large-img-box">
+        <button onclick="largeboxoff()">欣赏完毕</button>
+</div>
+
 <div id="advice-box">
     <button id="close-advice-button" onclick="closeadvicebox()"><em>关闭</em></button>    
     <div id="advice-content">
@@ -25,13 +30,19 @@
     <img src="pic/ideaunlimited.jpg">
     <h1>关于本站的使用</h1>   
     <h2>中心区域</h2>
-    <p>你可以使用 <em id="status-switch-icon" class="fa fa-random"></em> 按钮来进行搜索模式与随机模式的切换，默认状态下是随机模式</p>
+    <p>你可以使用 <em id="status-switch-icon" class="fa fa-random"></em> 按钮来进行搜索模式与随机模式的切换，默认状态下是随机模式。</p>
     <h3>随机模式</h3>
     <p>点击右下角的 <em class="fa fa-refresh"></em> 按钮来随机一张图片，在一秒之后可以再次请求。受限于服务器压力，加载速度可能不是那么理想，敬请见谅。</p>
+    <p>点击图片来放大。</p>
+    <p>你觉得太慢的话就提交下反馈吧，或者通过右下角的统计功能看看刷新量来判断服务器的压力。</p>
     <h3>搜索模式</h3>
     <p>在搜索框中输入内容（id或者关键词）来进行查找，点击搜索结果即会跳转。</p>
     <h2>关于上传</h2>
-    <p>上传时，请上传我们支持的格式（jpg\png\jpeg\gif），请尽量将图片大小控制在2MB以内，所有上传的图片均会经过人工审核，审核速度有快有慢。</p>
+    <p>上传时，请上传我们支持的格式（jpg\png\jpeg\gif），请尽量将图片大小控制在2MB以内捏，所有上传的图片均会经过人工审核，审核速度有快有慢。</p>
+    <p>上传的图片描述中，如果遇到不能填写的部分，请打一个空格，我将进行二次删改。</p>
+    <p>特别烂的活就不要传了，如果图片与本站主题一点关系都没有是不会收录的。</p>
+    <p>如果你发现了不对劲的东西，请通过页面底部的反馈通道提出，特别感谢。</p>
+    <p>如果上传的内容中有违反中华人民共和国法律的，本站将直接删除，多次上传将封禁ip。</p>
     <h2>作者</h2>
     <p><a target="_blank" href="https://space.bilibili.com/206149936">     
         <svg t="1650785793374" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1918" width="200" height="200">
@@ -75,12 +86,12 @@
         }
     </script>
 
+
     <!-- 中间的大盒子 -->
     <div id="pic-box">
-
+        
         <script>
             function status_switch() {
-
                 // 开关图标切换
                 if (!document.getElementById("status-switch-icon").classList.contains('fa-search')) {
                     {
@@ -112,6 +123,28 @@
                     }, 399);
                 }
 
+            }
+            function showlargebox() {
+                document.getElementById('blurbox').style.filter="blur(5.2px)";
+                document.getElementById('blurbox').classList.add("blurbox");
+                document.getElementById('large-box').classList.add("fade-in");
+                document.getElementById('large-box').style.display="block"; 
+                setTimeout(function(){
+                    document.getElementById('large-box').classList.remove("fade-in");
+                },299);
+                
+            }
+            function largeboxoff(){
+                document.getElementById('blurbox').style.filter="none"; 
+                document.getElementById('large-box').classList.add("fade-out");
+                
+                setTimeout(function(){
+                    document.getElementById('large-box').style.display="none";
+                    document.getElementById('large-box').classList.remove("fade-out");
+                },299);
+                
+                document.getElementById('blurbox').classList.remove("blurbox");
+                
             }
             function openadvicebox() {
                 document.getElementById('blurbox').style.filter="blur(5.2px)";
@@ -154,7 +187,7 @@
 
         <div id="rand-pic-section">
             <div id='pic'>
-                <img alt="" id='rand-pic'>
+                <img alt="" id='rand-pic' onclick="showlargebox()">
             </div>
             <div id="pic-info-title">
                 <h1 id="fore-title"></h1>
@@ -201,20 +234,42 @@
                     var suffix_length = document.getElementById("suffix-title").innerText.length;
                     var maxlength = 12;
                     document.getElementById("rand-pic").style.maxWidth = (window.innerWidth - 100) + "px";
-                    if(document.getElementById("rand-pic").width > 400 && window.innerWidth > 1200 && suffix_length > maxlength){
+                    if(document.getElementById("rand-pic").width >= 400 && window.innerWidth > 1200 && suffix_length > maxlength){
                         document.getElementById("pic-box").style.minWidth = "1180px";
+                        document.getElementById("large-img-box").style.maxWidth = "700px";
                     }else if(document.getElementById("rand-pic").width < 400 && window.innerWidth > 1200 && suffix_length < maxlength){
                         document.getElementById("pic-box").style.minWidth = "700px";
-                    }else if(document.getElementById("rand-pic").width > 500 && window.innerWidth > 1200 && suffix_length < maxlength){
+                        document.getElementById("large-img-box").style.maxWidth = "700px";
+                    }else if(document.getElementById("rand-pic").width < 400 && window.innerWidth > 1200 && suffix_length > maxlength){
                         document.getElementById("pic-box").style.minWidth = "1180px";
+                        document.getElementById("large-img-box").style.maxWidth = "1200px";
+                    }else if(document.getElementById("rand-pic").width >= 500 && window.innerWidth > 1200 && suffix_length < maxlength){
+                        document.getElementById("pic-box").style.minWidth = "1180px";
+                        document.getElementById("large-img-box").style.maxWidth = "1200px";
                     }else if(document.getElementById("rand-pic").width < 400 && window.innerWidth < 1200 && suffix_length < maxlength){
                         document.getElementById("pic-box").style.minWidth = "300px";
+                        document.getElementById("large-img-box").style.maxWidth = "400px";
                     }
                 }
 
 
                 function getpic(id) {
                     console.log("图片获取开始");
+                    $.ajax({
+                    url: "timesbeenrequired.php",
+                    type: "post",
+                    dataType: "text",
+                    data: true,
+                    success: function(resultjson) {
+                        var resultjson = JSON.parse(resultjson);
+                        var totalrequired = resultjson[0].totalrequired;
+                        window.totalrequired = totalrequired;
+                        document.getElementById("totalrequired").innerHTML = totalrequired;
+                    }
+                })
+
+
+
                     if (id !== null && id !== undefined) {
                         if (window.i_pic_size !== 0) {
                             window.i_pic_size = 0;
@@ -241,6 +296,7 @@
                                 document.getElementById("pic-id").innerHTML = id;
                                 loading();
                                 document.getElementById("rand-pic").src = picpath;
+                                document.getElementById("large-img-box").src = picpath;
                                 document.title = fore + "|" + "义眼丁真收集站";
                                 
                             }
@@ -271,6 +327,7 @@
                                 document.getElementById("pic-id").innerHTML = rand;
                                 loading();
                                 document.getElementById("rand-pic").src = picpath;
+                                document.getElementById("large-img-box").src = picpath;
                                 document.title = fore + "|" + "义眼丁真收集站";
                                 
                                 console.log(picinfo,verified);
@@ -451,9 +508,11 @@
         </div>
 
 
+        
+
     </div>
-
-
+    <div id="bg-text">www.yiyandingzhen.top</div>
+    
 
 
 
@@ -461,6 +520,7 @@
     <!-- 底部导航 -->
     <div id="bottom-site-info">
 
+        
         <!-- 开关底部导航栏 -->
         <script>
             function declaration() {
@@ -561,7 +621,70 @@
                 }, 200);
 
             }
+
+            function feedback() {
+
+                if (!document.getElementById("feedback-box").style.display) {
+                    document.getElementById('feedback-box').style.display = "block";
+                    document.getElementById('feedback-box').classList.add("box-scale-up");
+                    document.getElementById('feedback-box').classList.remove("box-scale-down");
+                } else {
+                    document.getElementById('feedback-box').classList.remove("box-scale-up");
+                    document.getElementById('feedback-box').classList.add("box-scale-down");
+                    setTimeout(function() {
+                        document.getElementById('feedback-box').style.display = "";
+                    }, 200);
+
+                }
+                }
+
+            function feedbackoff() {
+                document.getElementById('feedback-box').classList.remove("box-scale-up");
+                document.getElementById('feedback-box').classList.add("box-scale-down");
+                setTimeout(function() {
+                    document.getElementById('feedback-box').style.display = "";
+                }, 200);
+
+            }
+
+            function uploadfeedback() {
+                if(!document.getElementById('feedback-textarea').value){
+                    document.getElementById('feedback-textarea').setAttribute('placeholder','你得写点再传啊，不然我看啥。')
+                    return false;
+                }
+                var FeedbackToUpload = new FormData(document.getElementById("feedback-form"));
+                $.ajax({
+                    cache: false,
+                    url: "feedback.php",
+                    type: "post",
+                    processData: false,
+                    contentType: false,
+                    data: FeedbackToUpload,
+                    success: function(resultjson) {
+                        var resultjson = JSON.parse(resultjson);
+                        document.getElementById("feedback-upload-button").innerHTML = "提交成功";
+                        document.getElementById("feedback-button").innerHTML = "提交成功";
+                        feedbackoff();
+                        setTimeout(function(){
+                            document.getElementById("feedback-upload-button").innerHTML = "我 好 啦"; 
+                            document.getElementById("feedback-button").innerHTML = "反馈捏";
+                        },10000);
+                    }
+                })
+            }
+            
         </script>
+
+        <a id="feedback-button" onclick="feedback()">反馈</a>
+        
+        <div id="feedback-box">
+            <form id="feedback-form">
+            <textarea name="feedback" id="feedback-textarea" placeholder="发现了不对劲的东西，或者有什么想对作者说的，都写出来吧qwq"></textarea></form>
+            <button id="feedback-upload-button" onclick="uploadfeedback()">我 好 了</button>
+
+        </div>
+
+
 
         <div onclick="declaration()" class="nav-button" id="declaration-button"><a>声明</a></div>
         <div onclick="recommendation()" class="nav-button" id="recommendation-button"><a>引流</a></div>
@@ -754,6 +877,9 @@
             <br/>
             <em id="waittoverify"></em>
             <i id="waittoverify-text" >张照片待审核</i>
+            <br/>
+            <em id="totalrequired"></em>
+            <i id="totalrequired-text" >次请求</i>
 
             <!-- 页面统计 -->
             <script>
@@ -782,6 +908,36 @@
                     }
                 })
                 }
+
+
+                
+                function IsPC(){  
+                    var userAgentInfo = navigator.userAgent;
+                    var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");  
+                    var flag = true;  
+                    for (var v = 0; v < Agents.length; v++) {  
+                        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }  
+                    }  
+                    return flag;  
+                }
+
+                if(IsPC()){
+                
+                    let pic_box = document.getElementById("pic-box");
+                    let bg_text = document.getElementById("bg-text");
+                    document.onmousemove = function(mousemoveevent){
+                        mousemoveevent = mousemoveevent || window.mousemoveevent;
+                        let bg_left = (mousemoveevent.clientX - (window.innerWidth / 2) )/20;
+                        let bg_top = (mousemoveevent.clientY - (window.innerWidth / 2) )/10;
+                        let left = (mousemoveevent.clientX - (window.innerWidth / 2) )/15;
+                        let top = (mousemoveevent.clientY - (window.innerWidth / 2) )/15;
+                        pic_box.style.top = top + "px";
+                        pic_box.style.left = left + "px";
+                        bg_text.style.top = bg_top + "px";
+                        bg_text.style.left = bg_left + "px";
+
+                    
+                }}
                 
             </script>
 

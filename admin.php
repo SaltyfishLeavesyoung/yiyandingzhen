@@ -55,6 +55,7 @@ $psword=$_GET['password'];
 
 </form>
 <button onclick="upload()" type="$_POST" name="upload">通过了</button>
+<button onclick="feedback()" type="$_POST" name="feedback">读过了</button>
 </div>
 
 
@@ -69,18 +70,22 @@ $psword=$_GET['password'];
             $.getJSON("admin-get.php", function(picjson) {
                 
                 var picinfo = picjson;
+                window.picinfo = picinfo;
                 
                 console.log(picinfo);
                 resultnum = picinfo[0].result.length;
                 var result_box = document.getElementById("result-box");
                 
+                
+
                 for (i = 0; i < resultnum; i++) {
                     
                 var fore = picinfo[0].result[i][1];
                 var mid = picinfo[0].result[i][2];
                 var suffix = picinfo[0].result[i][3];
                 var picpath = picinfo[0].result[i][4];
-                var id = picinfo[0].result[i][0]
+                var pic_time = picinfo[0].result[i][5];
+                var id = picinfo[0].result[i][0];
                 
                 var pic_box = document.createElement("img");
                 result_box.appendChild(pic_box);
@@ -89,10 +94,34 @@ $psword=$_GET['password'];
 
                 var word_box = document.createElement("a");
                 result_box.appendChild(word_box);
-                word_box.innerHTML= fore + "|" + mid + "|" + suffix +":" + id;
+                var time = new Date(pic_time*1000);
+                word_box.innerHTML= fore + "|" + mid + "|" + suffix +":" + id + "|" + time.toLocaleString();
                 word_box.className= "word-box";
                 
-    };
+                };
+
+                resultnum = picinfo[0].feedback.length;
+                for (i = 0; i < resultnum; i++) {
+                    
+                    var feedback_id = picinfo[0].feedback[i][0];
+                    var feedback_val = picinfo[0].feedback[i][1];
+                    var feedback_time = picinfo[0].feedback[i][2];
+                    
+
+                    var feedback_h2 = document.createElement("h2");
+                    result_box.appendChild(feedback_h2);
+                    var time = new Date(feedback_time*1000);
+                    
+                    feedback_h2.innerHTML= "反馈" + feedback_id +" | "+ time.toLocaleString();
+                    feedback_h2.className= "word-box";
+
+                    var feedback_p = document.createElement("p");
+                    result_box.appendChild(feedback_p);
+                    feedback_p.innerHTML= feedback_val;
+                    feedback_p.className= "word-box";
+    
+                    
+                };
 })
 
     function upload(){
@@ -111,6 +140,23 @@ $psword=$_GET['password'];
                             }
                         })
                         location.reload();
+    }
+
+    function feedback(){
+                        $.ajax({
+                            cache: false,
+                            url: "feedback-work.php",
+                            type: "post",
+                            processData: false,
+                            contentType: false,
+                            data:true,
+                            success: function(resultjson) {
+                                var resultjson = JSON.parse(resultjson);
+                                console.log(resultjson);
+                                
+                            }
+                        })
+        location.reload();
     }
             
     

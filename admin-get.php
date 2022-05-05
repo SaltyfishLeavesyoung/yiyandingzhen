@@ -17,14 +17,15 @@ mysqli_select_db($conn , "yiyandingzhen");
     $data = mysqli_fetch_all($retvar);
 
        $result = mysqli_fetch_all($conn -> query("SELECT * FROM yiyandingzhen WHERE verified = 0 " ));
+       $feedback = mysqli_fetch_all($conn -> query("SELECT * FROM feedback WHERE hasRead = 0 " ));
 
 
         $picFolderPath = "pic";
 
         $retarr[] = array(
-        
-            'result' => $result
-
+            
+            'result' => $result,
+'feedback' => $feedback,
     ); 
 
 

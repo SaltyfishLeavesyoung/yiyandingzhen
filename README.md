@@ -30,12 +30,3 @@
 
 粒子特效来自[VincentGarreau](https://github.com/VincentGarreau/particles.js)
 </div>
-<div>
-<h2>待更新:</h2>
-
-添加图片问题反馈
-
-统计重做
-
-优化流畅度
-</div>
