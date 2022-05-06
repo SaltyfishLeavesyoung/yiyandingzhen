@@ -35,6 +35,8 @@
     <p>点击右下角的 <em class="fa fa-refresh"></em> 按钮来随机一张图片，在一秒之后可以再次请求。受限于服务器压力，加载速度可能不是那么理想，敬请见谅。</p>
     <p>点击图片来放大。</p>
     <p>你觉得太慢的话就提交下反馈吧，或者通过右下角的统计功能看看刷新量来判断服务器的压力。</p>
+    <p>不要在反馈里骂人，鼠鼠受不了。</p>
+    <p>左上角有个😅，那是绷功能，我也不知道是干什么的。</p>
     <h3>搜索模式</h3>
     <p>在搜索框中输入内容（id或者关键词）来进行查找，点击搜索结果即会跳转。</p>
     <h2>关于上传</h2>
@@ -43,6 +45,7 @@
     <p>特别烂的活就不要传了，如果图片与本站主题一点关系都没有是不会收录的。</p>
     <p>如果你发现了不对劲的东西，请通过页面底部的反馈通道提出，特别感谢。</p>
     <p>如果上传的内容中有违反中华人民共和国法律的，本站将直接删除，多次上传将封禁ip。</p>
+    <p>请不要重复上传无意义内容……</p>
     <h2>作者</h2>
     <p><a target="_blank" href="https://space.bilibili.com/206149936">     
         <svg t="1650785793374" class="icon" viewBox="0 0 1129 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1918" width="200" height="200">
@@ -62,13 +65,13 @@
         <h2>捐赠</h2>
         <p>捐赠纯属自愿，我没有从任何人汲取钱财，我只是把收款二维码放在这里，我没有强迫任何人付钱。所有所得只是为了让站点访问更快。</p>
         <p>若要捐赠请标注：你是为这个站点捐赠的。</p>
-        <img id="alipay-pic">
+        <a href="alipay.png" target="_blank">我的支付宝</a>
         <h2>愿景</h2>
         <p>希望这个站点再往后被人打开时，会有人了解到这个抽象的网络时期，知道鼠鼠们的想象力是无限的捏。</p>
         <h2>待添加的功能</h2>
         <ul>
-            <li><del>反馈系统</del></li>
-            <li>点赞按钮</li>
+            <li><del>反馈系统</del>(做好了)</li>
+            <li><del>点赞按钮</del>(做好了)</li>
             <li>收集到两千张换图床</li>
         </ul>
     </div>
@@ -274,23 +277,24 @@
                     }
                 }
 
-                function beng(id) {
+                function beng(pic_id,add1) {
                     var bengtimes = sessionStorage.getItem("bengtimes");
                     bengtimes = parseInt(bengtimes) + 1;
                     sessionStorage.setItem("bengtimes",bengtimes);
-                    if(parseInt(sessionStorage.getItem("bengtimes"))<5){
+                    if(parseInt(sessionStorage.getItem("bengtimes"))<=5){
                     $.ajax({
                             url: "beng.php",
                             type: "post",
                             dataType: "text",
                             data: {
-                                id,
-                                "add1":true
+                                pic_id,
+                                add1
                             },
                             success: function(resultjson) {
                                 var bengjson = JSON.parse(resultjson);
                                 console.log(bengjson);
-                                var beng = bengjson[0].beng.beng;
+                                var beng = bengjson[0].beng;
+                                beng = parseInt(beng);
                                 document.getElementById("beng-num").innerHTML = beng;   
                             }
                         })}else{
@@ -299,7 +303,7 @@
                 }
 
                 function getpic(id) {
-                    sessionStorage.setItem("bengtimes",0);
+                    document.getElementById("beng-box").setAttribute("onclick","beng(" + id + "," + 1 + ")");
                     console.log("图片获取开始");
                     $.ajax({
                     url: "timesbeenrequired.php",
@@ -332,12 +336,15 @@
                             },
                             
                             success: function(resultjson) {
+                                sessionStorage.setItem("bengtimes",0);
                                 var picinfo = JSON.parse(resultjson);
                                 var fore = picinfo[0].fore.fore;
                                 var mid = picinfo[0].mid.mid;
                                 var suffix = picinfo[0].suffix.suffix;
                                 var picpath = picinfo[0].picpath[0];
-                                
+                                document.getElementById("beng-box").setAttribute("onclick","beng(" + id + "," + 1 + ")");
+                                beng(id,0);
+                                beng(id,1);
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;
@@ -356,6 +363,7 @@
                             window.i_pic_size = 0;
                         }
                         $.getJSON("getpic.php", function(picjson) {
+                            sessionStorage.setItem("bengtimes",0);
                             var picinfo = picjson;
                             var verified = picinfo[0].verified[0];
                                 if(verified == 0){
@@ -368,8 +376,9 @@
                                 var mid = picinfo[0].mid.mid;
                                 var suffix = picinfo[0].suffix.suffix;
                                 var picpath = picinfo[0].picpath.pic_path;
-                                document.getElementById("beng-box").setAttribute("onclick","beng(" + rand + ")")
-                                beng(rand);
+                                document.getElementById("beng-box").setAttribute("onclick","beng(" + rand + "," + 1 + ")");
+                                beng(rand,0);
+                                beng(rand,1);
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;
@@ -977,7 +986,6 @@
                 getpic();
 
                 document.getElementById('ideaunlimited-pic').src="pic/ideaunlimited.jpg";
-                document.getElementById('alipay-pic').src="alipay.png";
 
 
 
