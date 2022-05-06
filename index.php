@@ -5,7 +5,7 @@
 </script>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.7, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, minimum-scale=0.8, maximum-scale=2.0, user-scalable=yes" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>义眼丁真收集站</title>
     <link href="font-awesome-4.7.0\css\font-awesome.css" rel="stylesheet" type="text/css" />
@@ -27,7 +27,7 @@
     <div id="advice-content">
     <br/><br/><br/>
     <h1>创作建议</h1>    
-    <img src="pic/ideaunlimited.jpg">
+    <img id="ideaunlimited-pic">
     <h1>关于本站的使用</h1>   
     <h2>中心区域</h2>
     <p>你可以使用 <em id="status-switch-icon" class="fa fa-random"></em> 按钮来进行搜索模式与随机模式的切换，默认状态下是随机模式。</p>
@@ -62,12 +62,18 @@
         <h2>捐赠</h2>
         <p>捐赠纯属自愿，我没有从任何人汲取钱财，我只是把收款二维码放在这里，我没有强迫任何人付钱。所有所得只是为了让站点访问更快。</p>
         <p>若要捐赠请标注：你是为这个站点捐赠的。</p>
-        <img src="alipay.png">
+        <img id="alipay-pic">
         <h2>愿景</h2>
         <p>希望这个站点再往后被人打开时，会有人了解到这个抽象的网络时期，知道鼠鼠们的想象力是无限的捏。</p>
+        <h2>待添加的功能</h2>
+        <ul>
+            <li><del>反馈系统</del></li>
+            <li>点赞按钮</li>
+        </ul>
     </div>
 
 </div>
+
 <div id="blurbox">
 
 
@@ -269,7 +275,9 @@
                     url: "timesbeenrequired.php",
                     type: "post",
                     dataType: "text",
-                    data: true,
+                    data: {
+                        hasRequired : true,
+                    },
                     success: function(resultjson) {
                         var resultjson = JSON.parse(resultjson);
                         var totalrequired = resultjson[0].totalrequired;
@@ -397,7 +405,7 @@
                 }
 
 
-                getpic();
+                
             </script>
 
 
@@ -911,6 +919,8 @@
                 })
 
                 window.onload=function() {
+
+
                     $.ajax({
                     url: "timesbeenopen.php",
                     type: "post",
@@ -924,6 +934,13 @@
                         document.getElementById("totalvisit").innerHTML = totalvisit;
                     }
                 })
+                getpic();
+
+                document.getElementById('ideaunlimited-pic').src="pic/ideaunlimited.jpg";
+                document.getElementById('alipay-pic').src="alipay.png";
+
+
+
                 }
 
 
@@ -939,7 +956,6 @@
                 }
 
                 if(IsPC()){
-                
                     let pic_box = document.getElementById("pic-box");
                     let bg_text = document.getElementById("bg-text");
                     document.onmousemove = function(mousemoveevent){
@@ -952,9 +968,27 @@
                         pic_box.style.left = left + "px";
                         bg_text.style.top = bg_top + "px";
                         bg_text.style.left = bg_left + "px";
-
                     
                 }}
+
+                window.setInterval(() => {
+                    setTimeout(function(){
+                        $.ajax({
+                            url: "timesbeenrequired.php",
+                            type: "post",
+                            dataType: "text",
+                            data: {
+                                
+                            },
+                            success: function(resultjson) {
+                            var resultjson = JSON.parse(resultjson);
+                            var totalrequired = resultjson[0].totalrequired;
+                            window.totalrequired = totalrequired;
+                            document.getElementById("totalrequired").innerHTML = totalrequired;
+                    }
+                })
+                    }, 0);
+                }, 1000)
                 
             </script>
 
