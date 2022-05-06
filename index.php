@@ -196,9 +196,12 @@
         <div onclick="openadvicebox()" id="show-advice-box" class="nav-button"><em id="show-advice-icon" class="fa fa-question">
             </em></div>
 
+        <div onclick="beng()" id="beng-box" class="nav-button"><em id="beng-icon" >😅</em><em id="beng-num"></em></div>
+
         <div id="pic-box-icon">
             <a onclick="getpic(0)"><img id="pic-box-icon-img" src="favicon.png" alt="义眼丁真收集站"></a>
         </div>
+
 
         <div id="rand-pic-section">
             <div id='pic'>
@@ -271,8 +274,32 @@
                     }
                 }
 
+                function beng(id) {
+                    var bengtimes = sessionStorage.getItem("bengtimes");
+                    bengtimes = parseInt(bengtimes) + 1;
+                    sessionStorage.setItem("bengtimes",bengtimes);
+                    if(parseInt(sessionStorage.getItem("bengtimes"))<5){
+                    $.ajax({
+                            url: "beng.php",
+                            type: "post",
+                            dataType: "text",
+                            data: {
+                                id,
+                                "add1":true
+                            },
+                            success: function(resultjson) {
+                                var bengjson = JSON.parse(resultjson);
+                                console.log(bengjson);
+                                var beng = bengjson[0].beng.beng;
+                                document.getElementById("beng-num").innerHTML = beng;   
+                            }
+                        })}else{
+                            document.getElementById("beng-num").innerHTML = "别绷了";   
+                        }
+                }
 
                 function getpic(id) {
+                    sessionStorage.setItem("bengtimes",0);
                     console.log("图片获取开始");
                     $.ajax({
                     url: "timesbeenrequired.php",
@@ -341,7 +368,8 @@
                                 var mid = picinfo[0].mid.mid;
                                 var suffix = picinfo[0].suffix.suffix;
                                 var picpath = picinfo[0].picpath.pic_path;
-                                
+                                document.getElementById("beng-box").setAttribute("onclick","beng(" + rand + ")")
+                                beng(rand);
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;

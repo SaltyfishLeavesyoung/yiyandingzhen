@@ -256,6 +256,38 @@ width: 100%;
     left: 17px;
 }
 
+
+#beng-box{
+    position: absolute;
+    border-radius: 10px;
+    left:120px;
+    top: -65px;
+    min-width: 60px;
+    width:fit-content ;
+    height: 50px;
+    background-color: rgb(249, 249, 249);  
+    user-select: none;
+    padding-right: 36px;
+}
+
+#beng-icon{
+    position: relative;
+    font-size: 22px;
+    top: 20px;
+    left: 15px;
+    font-style: normal;
+}
+
+#beng-num{
+    position: relative;
+    font-size: 20px;
+    top: 20px;
+    left: 20px;
+    width: fit-content;
+    font-style: normal;
+    font-weight: 600;
+}
+
 #advice-box{
     display: none;
     position: absolute;
