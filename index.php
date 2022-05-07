@@ -43,7 +43,7 @@
     <h2>关于上传</h2>
     <p>上传时，请上传我们支持的格式（jpg\png\jpeg\gif），请尽量将图片大小控制在2MB以内捏，所有上传的图片均会经过人工审核，审核速度有快有慢。</p>
     <p>上传的图片描述中，如果遇到不能填写的部分，请打一个空格，我将进行二次删改。</p>
-    <p>特别烂的活就不要传了，如果图片与本站主题一点关系都没有是不会收录的。</p>
+    <p>特别烂的活就不要传了，如果图片与本站主题一点关系都没有是不会收录的。不是标准的yy开头的图片也可以上传哦。</p>
     <p>如果你发现了不对劲的东西，请通过页面底部的反馈通道提出，特别感谢。</p>
     <p>如果上传的内容中有违反中华人民共和国法律的，本站将直接删除，多次上传将封禁ip。</p>
     <p>请不要重复上传无意义内容……</p>
@@ -736,7 +736,7 @@
         
         <div id="feedback-box">
             <form id="feedback-form">
-            <textarea name="feedback" id="feedback-textarea" placeholder="发现了不对劲的东西，或者有什么想对作者说的，都写出来吧qwq"></textarea></form>
+            <textarea name="feedback" id="feedback-textarea" placeholder="发现了不对劲的东西，或者有什么想对作者说的，都写出来吧，也可以留下联系方式，我会看的qwq"></textarea></form>
             <button id="feedback-upload-button" onclick="uploadfeedback()">我 好 了</button>
 
         </div>

@@ -26,7 +26,7 @@
 
 ## 关于本站
 
-图标库引用自[Font Awesome](https://fortawesome.com)
+图标库引用自[Font Awesome](https://fontawesome.com)
 
 拼音识别来自[jifei](https://github.com/jifei/Pinyin)
 
