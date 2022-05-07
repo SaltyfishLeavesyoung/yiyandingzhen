@@ -11,7 +11,7 @@
     $file_suffix = substr($file,strpos($file,"."));
 
     //数据库
-require_once("password.php");
+    require_once("password.php");
 
     $conn = new mysqli($servername , $username, $password);
 
@@ -26,32 +26,35 @@ require_once("password.php");
     $new_file = $pic_id.'_'.Pinyin::getPinyin($fore).$file_suffix;
     
     $savepath = "pic";
-    if(is_dir($savepath)){
-        move_uploaded_file($_FILES["user-upload"]["tmp_name"],$savepath."/".$new_file);
-        $SERVER = $_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
-        $pic_url = $savepath.'/'.$new_file;
-        $time = time();
-    }
+    $file_type = image_type_to_mime_type(exif_imagetype($_FILES["user-upload"]["tmp_name"]));
+        if($file_type == "image/jpeg" || $file_type == "image/png" || $file_type == "image/gif" || $file_type == "image/jpg"){
+            move_uploaded_file($_FILES["user-upload"]["tmp_name"],$savepath."/".$new_file);
+            $SERVER = $_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
+            $pic_url = $savepath.'/'.$new_file;
+            $time = time();
+            $save_sql = "insert into yiyandingzhen (pic_id, fore, mid, suffix, pic_path, time, verified, beng) values ('$pic_id' ,'$fore', '$mid', '$suffix', '$pic_url', '$time', 0, 0)";
+            if ($conn->query($save_sql) === TRUE){ 
+                $sql_status = true;
+            }else{
+                $sql_status = false;
+            }
+            }else{
+                $sql_status = false;
+            }
 
 
     //数据库保存
-    $save_sql = "insert into yiyandingzhen (pic_id, fore, mid, suffix, pic_path, time) values ('$pic_id' ,'$fore', '$mid', '$suffix', '$pic_url', '$time')";
     
-    if ($conn->query($save_sql) === TRUE){ 
-        $sql_status = "ok";
-    }
 
 
     $retarr[] = array(
         'result' => $file_result,
         'file_suffix' => $file_suffix,
         'new_file_name' => $new_file,
-        'pic_fore' => $fore,
-        'pic_mid' => $mid,
-        'pic_suffix' => $suffix,
         'pic_url' => $pic_url,
         'id' => $pic_id,
-        'sql' => $sql_status
+        'sql' => $sql_status,
+        'type' => $file_type
     );
 
     echo json_encode($retarr,JSON_UNESCAPED_UNICODE);

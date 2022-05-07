@@ -1,5 +1,6 @@
 <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
     $exception_post = $_POST["exception"];
     $exception[] = explode(",",$exception_post);  
@@ -31,7 +32,7 @@
                 $picPath =  mysqli_fetch_array($conn -> query("SELECT pic_path FROM yiyandingzhen WHERE pic_id = {$exception_for} " ));
                 $sql_request = "DELETE FROM yiyandingzhen WHERE pic_id = $exception_for";
                 $conn -> query($sql_request); 
-                unlink($picPath[0][0]);
+                unlink($picPath[0]);
             }
             $mode = 3;
         }

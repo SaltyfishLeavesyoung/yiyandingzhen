@@ -28,7 +28,8 @@
     <br/><br/><br/>
     <h1>创作建议</h1>    
     <img id="ideaunlimited-pic">
-    <h1>关于本站的使用</h1>   
+    <h1>关于本站的使用</h1>
+    <h3>ps:139742188，加群聊天吧</h3>   
     <h2>中心区域</h2>
     <p>你可以使用 <em id="status-switch-icon" class="fa fa-random"></em> 按钮来进行搜索模式与随机模式的切换，默认状态下是随机模式。</p>
     <h3>随机模式</h3>
@@ -60,7 +61,7 @@
     本项目的Github托管
                     
         </a></p>
-        <p>与作者交流可以通过阿b私信或者直接加我QQ：1967641462。</p>
+        <p>与作者交流可以通过阿b私信或者加群139742188。</p>
         <p>本站是2022五一做出来的，纯手写，没有使用框架，所以质量很屑。</p>
         <h2>捐赠</h2>
         <p>捐赠纯属自愿，我没有从任何人汲取钱财，我只是把收款二维码放在这里，我没有强迫任何人付钱。所有所得只是为了让站点访问更快。</p>
@@ -344,7 +345,6 @@
                                 var picpath = picinfo[0].picpath[0];
                                 document.getElementById("beng-box").setAttribute("onclick","beng(" + id + "," + 1 + ")");
                                 beng(id,0);
-                                beng(id,1);
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;
@@ -378,7 +378,6 @@
                                 var picpath = picinfo[0].picpath.pic_path;
                                 document.getElementById("beng-box").setAttribute("onclick","beng(" + rand + "," + 1 + ")");
                                 beng(rand,0);
-                                beng(rand,1);
                                 document.getElementById("fore-title").innerHTML = fore;
                                 document.getElementById("mid-title").innerHTML = mid;
                                 document.getElementById("suffix-title").innerHTML = suffix;
@@ -874,11 +873,22 @@
                             data: picToUpload,
                             success: function(resultjson) {
                                 var resultjson = JSON.parse(resultjson);
+                                console.log(resultjson);
+                                if (resultjson[0].sql == true){
                                 document.getElementById("show-upload-status").innerHTML = "上传成功，序号为" + resultjson[0].id;
                                 document.getElementById("upload-input-fore").value = "";
                                 document.getElementById("upload-input-mid").value = "";
                                 document.getElementById("upload-input-suffix").value = "";
                                 document.getElementById("user-upload").value = "";
+                        }
+                                if(resultjson[0].sql == false){
+                                    document.getElementById("show-upload-status").innerHTML = "上传失败，你是不是上传了脚本呀，可爱捏";
+                                    document.getElementById("upload-input-fore").value = "";
+                                    document.getElementById("upload-input-mid").value = "";
+                                    document.getElementById("upload-input-suffix").value = "";
+                                    document.getElementById("user-upload").value = "";
+                                }
+                                
                             }
                         })
                     }
