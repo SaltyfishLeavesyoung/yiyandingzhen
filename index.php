@@ -584,14 +584,13 @@
                 if (!document.getElementById("declaration-box").style.display) {
                     document.getElementById('declaration-box').style.display = "block";
                     document.getElementById('declaration-box').classList.add("box-scale-up");
+                    uploadoff()
+                    recommendationoff()
+                    statisticsoff()
+                    feedbackoff()
                     document.getElementById('declaration-box').classList.remove("box-scale-down");
                 } else {
-                    document.getElementById('declaration-box').classList.remove("box-scale-up");
-                    document.getElementById('declaration-box').classList.add("box-scale-down");
-                    setTimeout(function() {
-                        document.getElementById('declaration-box').style.display = "";
-                    }, 200);
-
+                    declarationoff()
                 }
             }
 
@@ -608,14 +607,13 @@
                 if (!document.getElementById("recommendation-box").style.display) {
                     document.getElementById('recommendation-box').style.display = "block";
                     document.getElementById('recommendation-box').classList.add("box-scale-up");
+                    declarationoff()
+                    uploadoff()
+                    statisticsoff()
+                    feedbackoff()
                     document.getElementById('recommendation-box').classList.remove("box-scale-down");
                 } else {
-                    document.getElementById('recommendation-box').classList.remove("box-scale-up");
-                    document.getElementById('recommendation-box').classList.add("box-scale-down");
-                    setTimeout(function() {
-                        document.getElementById('recommendation-box').style.display = "";
-                    }, 200);
-
+                    recommendationoff()
                 }
             }
 
@@ -629,18 +627,16 @@
             }
 
             function upload() {
-
                 if (!document.getElementById("upload-box").style.display) {
                     document.getElementById('upload-box').style.display = "block";
                     document.getElementById('upload-box').classList.add("box-scale-up");
+                    declarationoff()
+                    recommendationoff()
+                    statisticsoff()
+                    feedbackoff()
                     document.getElementById('upload-box').classList.remove("box-scale-down");
                 } else {
-                    document.getElementById('upload-box').classList.remove("box-scale-up");
-                    document.getElementById('upload-box').classList.add("box-scale-down");
-                    setTimeout(function() {
-                        document.getElementById('upload-box').style.display = "";
-                    }, 200);
-
+                    uploadoff();
                 }
             }
 
@@ -654,19 +650,16 @@
             }
 
             function statistics() {
-
-
                 if (!document.getElementById("statistics-box").style.display) {
                     document.getElementById('statistics-box').style.display = "block";
                     document.getElementById('statistics-box').classList.add("box-scale-up");
+                    declarationoff()
+                    recommendationoff()
+                    uploadoff()
+                    feedbackoff()
                     document.getElementById('statistics-box').classList.remove("box-scale-down");
                 } else {
-                    document.getElementById('statistics-box').classList.remove("box-scale-up");
-                    document.getElementById('statistics-box').classList.add("box-scale-down");
-                    setTimeout(function() {
-                        document.getElementById('statistics-box').style.display = "";
-                    }, 200);
-
+                    statisticsoff();
                 }
             }
 
@@ -684,14 +677,12 @@
                 if (!document.getElementById("feedback-box").style.display) {
                     document.getElementById('feedback-box').style.display = "block";
                     document.getElementById('feedback-box').classList.add("box-scale-up");
+                    declarationoff()
+                    recommendationoff()
+                    uploadoff()
+                    statisticsoff()
                     document.getElementById('feedback-box').classList.remove("box-scale-down");
                 } else {
-                    document.getElementById('feedback-box').classList.remove("box-scale-up");
-                    document.getElementById('feedback-box').classList.add("box-scale-down");
-                    setTimeout(function() {
-                        document.getElementById('feedback-box').style.display = "";
-                    }, 200);
-
                 }
                 }
 
@@ -1000,8 +991,6 @@
 
 
                 }
-
-
                 
                 function IsPC(){  
                     var userAgentInfo = navigator.userAgent;
@@ -1026,7 +1015,6 @@
                         pic_box.style.left = left + "px";
                         bg_text.style.top = bg_top + "px";
                         bg_text.style.left = bg_left + "px";
-                    
                 }}
 
                 // window.setInterval(() => {
