@@ -683,6 +683,7 @@
                     statisticsoff()
                     document.getElementById('feedback-box').classList.remove("box-scale-down");
                 } else {
+                    feedbackoff() 
                 }
                 }
 
